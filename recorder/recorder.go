@@ -8,6 +8,7 @@ import (
 	"github.com/amitbet/vncproxy/common"
 	"github.com/amitbet/vncproxy/logger"
 	"github.com/amitbet/vncproxy/server"
+	"buffio"
 )
 
 type Recorder struct {
@@ -38,7 +39,7 @@ func NewRecorder(saveFilePath string) (*Recorder, error) {
 
 	rec.maxWriteSize = 65535
 
-	rec.writer, err = os.OpenFile(saveFilePath, os.O_RDWR|os.O_CREATE, 0644)
+	rec.writer, err = bufio.NewWriterSize(os.OpenFile(saveFilePath, os.O_RDWR|os.O_CREATE, 0644), 16 * 1024 * 1024)
 	if err != nil {
 		logger.Errorf("unable to open file: %s, error: %v", saveFilePath, err)
 		return nil, err
