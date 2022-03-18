@@ -24,8 +24,10 @@ fi
 
 
 
-OSES=( linux darwin windows )
-ARCHS=(amd64 386 )
+#OSES=( linux darwin windows )
+OSES=( linux )
+#ARCHS=(amd64 386 )
+ARCHS=(amd64 )
 for os in ${OSES[@]}; do
 	for arch in ${ARCHS[@]}; do
 		suffix=""
