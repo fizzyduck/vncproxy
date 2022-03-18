@@ -45,7 +45,7 @@ func NewRecorder(saveFilePath string) (*Recorder, error) {
 		return nil, err
     	}
 	
-	rec.writer := bufio.NewWriterSize(fo, 16 * 1024 * 1024)
+	rec.writer = bufio.NewWriterSize(fo, 16 * 1024 * 1024)
 
 	//buffer the channel so we don't halt the proxying flow for slow writes when under pressure
 	rec.segmentChan = make(chan *common.RfbSegment, 100)
