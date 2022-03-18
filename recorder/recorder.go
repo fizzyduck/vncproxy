@@ -14,7 +14,7 @@ import (
 type Recorder struct {
 	//common.BytesListener
 	RBSFileName string
-	writer      *os.File
+	writer      *bufio.Writer
 	//logger              common.Logger
 	startTime           int
 	buffer              bytes.Buffer
