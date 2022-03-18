@@ -15,6 +15,7 @@ type Recorder struct {
 	//common.BytesListener
 	RBSFileName string
 	writer      *bufio.Writer
+	fo      *os.File
 	//logger              common.Logger
 	startTime           int
 	buffer              bytes.Buffer
@@ -39,7 +40,7 @@ func NewRecorder(saveFilePath string) (*Recorder, error) {
 
 	rec.maxWriteSize = 65535
 
-	fo, err := os.Create("output.txt")
+	writer.fo, err = os.OpenFile(saveFilePath, os.O_RDWR|os.O_CREATE, 0644)
     	if err != nil {
         	logger.Errorf("unable to open file: %s, error: %v", saveFilePath, err)
 		return nil, err
@@ -213,5 +214,6 @@ func (r *Recorder) writeToDisk() error {
 // }
 
 func (r *Recorder) Close() {
-	r.writer.Close()
+	r.writer.Flush()
+	r.fo.Close()
 }
