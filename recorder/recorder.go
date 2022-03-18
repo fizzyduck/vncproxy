@@ -39,7 +39,7 @@ func NewRecorder(saveFilePath string) (*Recorder, error) {
 
 	rec.maxWriteSize = 65535
 
-	rec.writer, err = bufio.NewWriterSize(os.OpenFile(saveFilePath, os.O_RDWR|os.O_CREATE, 0644), 16 * 1024 * 1024)
+	rec.writer := bufio.NewWriterSize(os.OpenFile(saveFilePath, os.O_RDWR|os.O_CREATE, 0644), 16 * 1024 * 1024)
 	if err != nil {
 		logger.Errorf("unable to open file: %s, error: %v", saveFilePath, err)
 		return nil, err
