@@ -39,11 +39,13 @@ func NewRecorder(saveFilePath string) (*Recorder, error) {
 
 	rec.maxWriteSize = 65535
 
-	rec.writer := bufio.NewWriterSize(os.OpenFile(saveFilePath, os.O_RDWR|os.O_CREATE, 0644), 16 * 1024 * 1024)
-	if err != nil {
-		logger.Errorf("unable to open file: %s, error: %v", saveFilePath, err)
+	fo, err := os.Create("output.txt")
+    	if err != nil {
+        	logger.Errorf("unable to open file: %s, error: %v", saveFilePath, err)
 		return nil, err
-	}
+    	}
+	
+	rec.writer := bufio.NewWriterSize(fo, 16 * 1024 * 1024)
 
 	//buffer the channel so we don't halt the proxying flow for slow writes when under pressure
 	rec.segmentChan = make(chan *common.RfbSegment, 100)
