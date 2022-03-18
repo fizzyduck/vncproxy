@@ -8,7 +8,7 @@ import (
 	"github.com/amitbet/vncproxy/common"
 	"github.com/amitbet/vncproxy/logger"
 	"github.com/amitbet/vncproxy/server"
-	"buffio"
+	"bufio"
 )
 
 type Recorder struct {
