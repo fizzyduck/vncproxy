@@ -38,7 +38,7 @@ func NewRecorder(saveFilePath string) (*Recorder, error) {
 	rec := Recorder{RBSFileName: saveFilePath, startTime: getNowMillisec()}
 	var err error
 
-	rec.maxWriteSize = 65535
+	rec.maxWriteSize = 65535 * 1024
 
 	rec.fo, err = os.OpenFile(saveFilePath, os.O_RDWR|os.O_CREATE, 0644)
     	if err != nil {
